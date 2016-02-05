@@ -18,12 +18,12 @@ RUN gpg --keyserver keys.gnupg.net --recv-keys F8C1CA08A57B9ED7 && \
     apt-get clean
 
 RUN sed -i 's|echo "on"$|echo "off"|' /opt/omd/versions/default/lib/omd/hooks/TMPFS
-RUN omd create omd || true
-RUN omd config omd set APACHE_TCP_ADDR 0.0.0.0
+RUN omd create mon || true
+RUN omd config mon set APACHE_TCP_ADDR 0.0.0.0
 #RUN echo 'root:root' | chpasswd
 #RUN echo 'demo:demo' | chpasswd
 
-ENV OMD_OMD /opt/omd/sites/omd
+ENV OMD_MON /opt/omd/sites/mon
 
 ADD run_omd.sh /run_omd.sh
 CMD ["/run_omd.sh"]
