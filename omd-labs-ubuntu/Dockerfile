@@ -1,7 +1,7 @@
 FROM ubuntu:14.04
 MAINTAINER Simon Meggle<simon.meggle@consol.de>
 #EXPOSE 80 22 4730 5666
-EXPOSE 80
+EXPOSE 80 443
 
 ENV REFRESHED 2015-11-16
 
@@ -20,6 +20,7 @@ RUN gpg --keyserver keys.gnupg.net --recv-keys F8C1CA08A57B9ED7 && \
 RUN sed -i 's|echo "on"$|echo "off"|' /opt/omd/versions/default/lib/omd/hooks/TMPFS
 RUN omd create mon || true
 RUN omd config mon set APACHE_TCP_ADDR 0.0.0.0
+RUN omd config mon set DEFAULT_GUI check_mk
 #RUN echo 'root:root' | chpasswd
 #RUN echo 'demo:demo' | chpasswd
 
